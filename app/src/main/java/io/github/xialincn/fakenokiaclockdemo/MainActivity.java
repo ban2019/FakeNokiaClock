@@ -2,9 +2,12 @@ package io.github.xialincn.fakenokiaclockdemo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import io.github.xialincn.fakenokiaclock.views.NokiaClockView;
@@ -20,6 +23,8 @@ public class MainActivity extends Activity {
 
     private NokiaClockView mClockView;
     private int mHour, mMinute;
+
+    private Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,16 @@ public class MainActivity extends Activity {
             public void onTimeUpdate(int value) {
                 mMinute = value;
                 updateTimeDisplay();
+            }
+        });
+
+        mButton = (Button) findViewById(R.id.button);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int duration = 500;
+                Snackbar.make(findViewById(R.id.coordinate_layout), R.string.snack_bar_info, duration)
+                        .show();
             }
         });
     }

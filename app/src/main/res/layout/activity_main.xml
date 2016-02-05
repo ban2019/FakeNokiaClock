@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinate_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.xialincn.fakenokiaclockdemo.MainActivity"
-    android:background="#000000">
+    tools:context="io.github.xialincn.fakenokiaclockdemo.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00 AM"
-        android:id="@+id/time"
-        android:textSize="50sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000">
 
-    <io.github.xialincn.fakenokiaclock.views.NokiaClockView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:id="@+id/nokia_clock"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/time">
-    </io.github.xialincn.fakenokiaclock.views.NokiaClockView>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="50dp"
+            android:text="00:00 AM"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp" />
 
-</RelativeLayout>
+        <io.github.xialincn.fakenokiaclock.views.NokiaClockView
+            android:id="@+id/nokia_clock"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@id/time"
+            android:layout_centerHorizontal="true"></io.github.xialincn.fakenokiaclock.views.NokiaClockView>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:layout_below="@id/nokia_clock"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
