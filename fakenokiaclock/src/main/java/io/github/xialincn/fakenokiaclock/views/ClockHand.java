@@ -12,25 +12,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.github.xialincn.fakenokiaclock.utils.Size;
-
+import static io.github.xialincn.fakenokiaclock.utils.Constants.*;
 
 /**
  * Created by lin on 2016/1/18.
  */
-public class HandView extends FrameLayout {
+public class ClockHand extends FrameLayout {
     private final String TAG = "HandView";
 
     // The ratio of the big surface's and the hand's width or height.
     public final static float mHandRatio = 5.5f;
 
-    protected TextView mTextView;
-    protected ImageView mImageView;
-    protected Size mSize;
+    private TextView mTextView;
+    private ImageView mImageView;
+    private Size mSize;
     private FrameLayout.LayoutParams mParams;
     private int mBoundary;
     private OnTimeUpdateListener mListener;
 
-    public HandView(Context context, AttributeSet attrs) {
+    public ClockHand(Context context, AttributeSet attrs) {
         super(context, null);
 
         mImageView = new ImageView(context);
@@ -46,8 +46,6 @@ public class HandView extends FrameLayout {
         mParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
     }
-
-    protected final int CIRCUMFERENCE = 360;
 
     public void init(int textColor, int resourceId, int end) {
         mImageView.setImageResource(resourceId);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import static io.github.xialincn.fakenokiaclock.utils.Constants.*;
 
 /**
  * Created by lin on 2016/1/31.
@@ -15,34 +16,31 @@ import android.widget.ImageView;
 public class ClockSurface extends ImageView {
     private final String TAG = "ClockSurface";
 
-    private HandView mHand;
+    private ClockHand mHand;
     private float mPivotXOnSurface, mPivotYOnSurface;
     private float mTouchX, mTouchY;
 
-    int count = 0;
-    int SAMPLE_PERIOD = 3;
+    private int count = 0;
+    private int SAMPLE_PERIOD = 3;
 
-    float CIRCUMFERENCE = 360f;
     // Assume the rotation time around one circle  to 30ms when there's a finger dragging.
-    final float STEP_ROTATE_VELOCITY = CIRCUMFERENCE / 30f;
+    private final float STEP_ROTATE_VELOCITY = CIRCUMFERENCE / 30f;
     // Assume the rotation time around one circle to 500ms.
     // Animation after long click should have a different velocity from the one above,
     // otherwise, there are not enough frames to show a complete animation.
-    final float LONG_CLICK_ROTATE_VELOCITY = CIRCUMFERENCE / 500f;
-
-    private double FLOAT_MIN = -10e-6;
+    private final float LONG_CLICK_ROTATE_VELOCITY = CIRCUMFERENCE / 500f;
 
     public ClockSurface(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public void addHand(HandView hand) {
+    public void addHand(ClockHand hand) {
         mHand = hand;
         initHand();
     }
 
     private void initHand() {
-        mHand.setPivotX(NokiaClockView.mLayoutSize.width / HandView.mHandRatio / 2);
+        mHand.setPivotX(NokiaClockView.mLayoutSize.width / ClockHand.mHandRatio / 2);
         ViewGroup.MarginLayoutParams lp1 = (ViewGroup.MarginLayoutParams) mHand.getLayoutParams();
         ViewGroup.MarginLayoutParams lp2 = (ViewGroup.MarginLayoutParams) this.getLayoutParams();
         mHand.setPivotY(mPivotYOnSurface - (lp1.topMargin - lp2.topMargin));
@@ -101,15 +99,15 @@ public class ClockSurface extends ImageView {
         return (long) (Math.abs(value1 - value2) / vel);
     }
 
-    public enum ContactType {TOUCH, LONG_CLICK}
+    private enum ContactType {TOUCH, LONG_CLICK}
 
-    protected double getTouchPointAngle(double x, double y) {
+    private double getTouchPointAngle(double x, double y) {
         double horizontal = x - mPivotXOnSurface;
         double vertical = y - mPivotYOnSurface;
 
         double rightAngleSide = Math.sqrt(horizontal * horizontal + vertical * vertical);
         double angle = Math.acos(-vertical / rightAngleSide) * CIRCUMFERENCE / 2 / Math.PI;
-        if (horizontal < FLOAT_MIN) {
+        if (horizontal < -FLOAT_MIN) {
             angle = CIRCUMFERENCE - angle;
         }
         return angle;

@@ -23,7 +23,7 @@ public class NokiaClockView extends FrameLayout {
     public static Size mLayoutSize = null;
 
     private ClockSurface mSmallSurface, mBigSurface;
-    private HandView mShortHand, mLongHand;
+    private ClockHand mShortHand, mLongHand;
     private int mHour, mMinute;
 
     private enum Period {AM, PM}
@@ -77,14 +77,14 @@ public class NokiaClockView extends FrameLayout {
     }
 
     private void addLongHand(Context context, AttributeSet attrs) {
-        int width = (int) (mLayoutSize.width / HandView.mHandRatio);
-        int height = (int) (mLayoutSize.height / HandView.mHandRatio);
+        int width = (int) (mLayoutSize.width / ClockHand.mHandRatio);
+        int height = (int) (mLayoutSize.height / ClockHand.mHandRatio);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
         int topMargin = (mLayoutSize.height - (int) (mLayoutSize.height / mSurfaceRatio) - 2 * height) / 4;
         params.setMargins(params.leftMargin, topMargin, params.rightMargin, params.bottomMargin);
         params.gravity = Gravity.CENTER_HORIZONTAL;
 
-        mLongHand = new HandView(context, attrs);
+        mLongHand = new ClockHand(context, attrs);
         mLongHand.init(Color.WHITE, R.drawable.long_hand, 60);
         addView(mLongHand, params);
         mLongHand.setOnTimeUpdateListener(new OnTimeUpdateListener() {
@@ -99,17 +99,17 @@ public class NokiaClockView extends FrameLayout {
     }
 
     private void addShortHand(Context context, AttributeSet attrs) {
-        int width = (int) (mLayoutSize.width / HandView.mHandRatio);
-        int height = (int) (mLayoutSize.height / HandView.mHandRatio);
+        int width = (int) (mLayoutSize.width / ClockHand.mHandRatio);
+        int height = (int) (mLayoutSize.height / ClockHand.mHandRatio);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
 
-        int handHeight = (int) (mLayoutSize.height / HandView.mHandRatio);
+        int handHeight = (int) (mLayoutSize.height / ClockHand.mHandRatio);
         int m = (mLayoutSize.height - (int) (mLayoutSize.height / NokiaClockView.mSurfaceRatio) - 2 * handHeight) / 4;
         int topMargin = m + height + m * 2;
         params.setMargins(params.leftMargin, topMargin, params.rightMargin, params.bottomMargin);
         params.gravity = Gravity.CENTER_HORIZONTAL;
 
-        mShortHand = new HandView(context, attrs);
+        mShortHand = new ClockHand(context, attrs);
         mShortHand.init(Color.BLACK, R.drawable.short_hand, 12);
         addView(mShortHand, params);
 
