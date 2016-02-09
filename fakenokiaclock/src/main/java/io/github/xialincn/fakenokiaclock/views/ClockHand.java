@@ -85,7 +85,7 @@ public class ClockHand extends FrameLayout {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (getRotation() < -10e-6) {
+                if (getRotation() < -FLOAT_MIN) {
                     setRotation(getRotation() + CIRCUMFERENCE);
                     if (mBoundary == MAX_HOUR) {
                         NokiaClockView.switchPeriod();
@@ -122,10 +122,9 @@ public class ClockHand extends FrameLayout {
             }
         });
 
-        final TextView tv = mTextView;
         float delta = angleEnd - angleStart;
-        ObjectAnimator counteractAnim = ObjectAnimator.ofFloat(tv, "Rotation", tv.getRotation(),
-                tv.getRotation() - delta);
+        ObjectAnimator counteractAnim = ObjectAnimator.ofFloat(mTextView, "Rotation", mTextView.getRotation(),
+                mTextView.getRotation() - delta);
         counteractAnim.setDuration(duration);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

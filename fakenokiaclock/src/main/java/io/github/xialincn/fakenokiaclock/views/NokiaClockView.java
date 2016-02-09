@@ -27,10 +27,13 @@ public class NokiaClockView extends FrameLayout {
     private int mHour, mMinute;
 
     private enum Period {AM, PM}
+
     private static Period sPeriod = Period.AM;
+
     public static void switchPeriod() {
         sPeriod = (sPeriod == Period.AM ? Period.PM : Period.AM);
     }
+
     public static String getPeriod() {
         return sPeriod.toString();
     }
@@ -87,6 +90,7 @@ public class NokiaClockView extends FrameLayout {
         mLongHand = new ClockHand(context, attrs);
         mLongHand.init(Color.WHITE, R.drawable.long_hand, 60);
         addView(mLongHand, params);
+
         mLongHand.setOnTimeUpdateListener(new OnTimeUpdateListener() {
             @Override
             public void onTimeUpdate(int value) {
